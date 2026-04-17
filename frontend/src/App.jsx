@@ -1,39 +1,38 @@
-<<<<<<< HEAD
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Header from './components/Header';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import Navigation from './components/MainDashboard/Navigation';
 import SignUpForm from './components/SignUpForm';
 import LoginForm from './components/LoginForm';
-import Dashboard from './components/Dashboard';  // ADD THIS LINE
-=======
-import Header from './components/Header';
-import SignUpForm from './components/SignUpForm';
->>>>>>> db91d7609ab7b98d57181c988e79c2fe9dee37c8
+import Dashboard from './components/Dashboard';
+import MainDashboard from './components/MainDashboard/MainDashboard';
 import './App.css';
+
+function AppContent() {
+  const location = useLocation();
+  
+
+  const hideNavigation = location.pathname === '/dashboard';
+
+  return (
+    <div className="app">
+      {!hideNavigation && <Navigation />}
+      <main>
+        <Routes>
+          <Route path="/" element={<Navigate to="/main-dashboard" />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/main-dashboard" element={<MainDashboard />} />
+        </Routes>
+      </main>
+    </div>
+  );
+}
 
 function App() {
   return (
-<<<<<<< HEAD
     <BrowserRouter>
-      <div className="app">
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Navigate to="/signup" />} />
-            <Route path="/signup" element={<SignUpForm />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </main>
-      </div>
+      <AppContent />
     </BrowserRouter>
-=======
-    <div className="app">
-      <Header />
-      <main>
-        <SignUpForm />
-      </main>
-    </div>
->>>>>>> db91d7609ab7b98d57181c988e79c2fe9dee37c8
   );
 }
 

@@ -30,7 +30,6 @@ export function Humanizer() {
   const [humanScore, setHumanScore]     = useState(null);
   const inputRef                        = useRef(null);
 
-  // Smoothly rotate loading phrases while processing
   useEffect(() => {
     let interval;
     if (isProcessing) {
@@ -46,9 +45,8 @@ export function Humanizer() {
   const handleHumanize = () => {
     if (!inputText.trim()) return;
     setIsProcessing(true);
-    setHumanScore(null); // Reset score during new process
+    setHumanScore(null);
 
-    // Simulate API logic
     setTimeout(() => {
       setOutputText(`[${strength.toUpperCase()} MODE] This version of your text has been rewritten to bypass AI detection while maintaining your core message...`);
       setHumanScore(Math.floor(Math.random() * (99 - 88 + 1) + 88));
@@ -60,7 +58,7 @@ export function Humanizer() {
     try {
       const text = await navigator.clipboard.readText();
       setInputText(text.slice(0, CHAR_LIMIT));
-    } catch (err) {
+    } catch (error) {
       console.error("Clipboard access denied");
     }
   };
@@ -177,3 +175,5 @@ export function Humanizer() {
     </div>
   );
 }
+
+export default Humanizer;
